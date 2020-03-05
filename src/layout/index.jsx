@@ -13,11 +13,11 @@ class Frame extends Component {
                 <Header />
                 <Layout>
                     <Menu />
-                    <Layout style={ { padding: '0 24px 24px' } }>
+                    <Layout style={ { padding: '0 12px 12px' } }>
                         <Content
                             className="site-layout-background"
                             style={ {
-                                padding: 24,
+                                padding: 16,
                                 margin: 0,
                                 minHeight: 280,
                             } }

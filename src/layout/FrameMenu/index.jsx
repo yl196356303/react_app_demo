@@ -38,7 +38,6 @@ class FrameMenu extends Component {
                                             { route.title }
                                         </Menu.Item>
                                     )
-                                    break;
                                 case 1:
                                     return (
                                         <Menu.Item
@@ -48,7 +47,6 @@ class FrameMenu extends Component {
                                             { route.title }
                                         </Menu.Item>
                                     )
-                                    break
                                 case 2:
                                     return (
                                         <Menu.Item
@@ -58,9 +56,8 @@ class FrameMenu extends Component {
                                             { route.title }
                                         </Menu.Item>
                                     )
-                                    break
                                 default:
-                                    break;
+                                    return false
                             }
                         })
                     }
