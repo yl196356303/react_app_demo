@@ -1,9 +1,24 @@
 .header {
+    display: flex;
     .logo {
         height: 100%;
+        flex: 1;
 
         img {
             height: 100%;
+        }
+    }
+    .yl-headerRight {
+        display: flex;
+        align-items: center;
+        .yl-dropdow {
+            color: #ffffff;
+            cursor: pointer;
+            margin-left: 8px;
+    
+            &:hover {
+                color: orange;
+            }
         }
     }
 }

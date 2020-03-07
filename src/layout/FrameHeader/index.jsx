@@ -1,17 +1,70 @@
-import React, { Component } from 'react';
-import { Layout } from 'antd'
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import {
+    Layout,
+    Menu,
+    Dropdown,
+    Avatar,
+    Badge
+} from 'antd'
+import { DownOutlined } from '@ant-design/icons'
 import logo from '../../assets/images/logo.png'
 import './Header.less'
+import { connect } from 'react-redux'
+import { getNotifiactions } from '../../actions/notifiaction'
 
 const { Header } = Layout
 
+const mapState = state => {
+    const { notificationList } = state.notification
+    return {
+        notificationCount: notificationList.filter(item => item.hasRead === false).length
+    }
+}
 
+@connect(mapState, { getNotifiactions })
+@withRouter
 class FrameHeader extends Component {
+    onMenuItem = ({ key }) => {
+        this.props.history.push(key)
+    }
+    renderMenu = () => {
+        return (
+            <Menu onClick={ this.onMenuItem }>
+                <Menu.Item key="/admin/notification">
+                    <Badge dot={ Boolean(this.props.notificationCount) }>
+                        通知中心
+                    </Badge>
+                </Menu.Item>
+                <Menu.Item key="/admin/settings">
+                    设置
+                </Menu.Item>
+                <Menu.Item key="/login">
+                    退出登录
+                </Menu.Item>
+            </Menu>
+        )
+    }
+    componentDidMount () {
+        this.props.getNotifiactions()
+    }
     render() {
+        console.log(this.props)
+        const {
+            notificationCount
+        } = this.props
         return (
             <Header className="header">
                 <div className="logo">
                     <img src={ logo } alt="logo" />
+                </div>
+                <div className='yl-headerRight'>
+                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    <Dropdown className='yl-dropdow' overlay={ this.renderMenu } trigger={ ['click'] }>
+                        <Badge count={ notificationCount } offset={ [8, -10] }>
+                            欢迎！xxx<DownOutlined />
+                        </Badge>
+                    </Dropdown>
                 </div>
             </Header>
         )

@@ -68,8 +68,15 @@ export default class Article extends Component {
       render: (text, record) => {
         return (
           <span>
-            <Button onClick={this.toArticleEdit.bind(this, record.id)} style={ { marginRight: '8px' } } size='small' type='primary'>编辑</Button>
-            <Button onClick={this.showModal.bind(this, record)} size='small' type='danger'>删除</Button>
+            <Button
+              onClick={ this.toArticleEdit.bind(this, record.id) }
+              style={ { marginRight: '8px' } }
+              size='small'
+              ype='primary'>编辑</Button>
+            <Button
+              onClick={ this.showModal.bind(this, record) }
+              size='small' 
+              type='danger'>删除</Button>
           </span>
         )
       }
@@ -165,7 +172,7 @@ export default class Article extends Component {
           confirmLoading={ isModalLoading }
           visible={ isModal }
           title={ modalTitle }
-          onCancel={ this.closeModal } 
+          onCancel={ this.closeModal }
           onOk={ this.deleteArticle.bind(this, articleId) }>
           <p>你确定要删除这篇文章吗？谨慎操作！！！</p>
         </Modal>

@@ -4,7 +4,8 @@ import {
     NotFound,
     Settings,
     ArticleList,
-    ArticleEdit
+    ArticleEdit,
+    Notification
 } from '../pages'
 
 export const mainRouter = [
@@ -41,5 +42,9 @@ export const adminRouter = [
         component: Settings,
         title: '设置',
         isNav: true
+    },
+    {
+        path: '/admin/notification',
+        component: Notification
     }
 ]

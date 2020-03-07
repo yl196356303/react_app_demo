@@ -1,6 +1,22 @@
+.header {
+  display: flex;
+}
 .header .logo {
   height: 100%;
+  flex: 1;
 }
 .header .logo img {
   height: 100%;
+}
+.header .yl-headerRight {
+  display: flex;
+  align-items: center;
+}
+.header .yl-headerRight .yl-dropdow {
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.header .yl-headerRight .yl-dropdow:hover {
+  color: orange;
 }

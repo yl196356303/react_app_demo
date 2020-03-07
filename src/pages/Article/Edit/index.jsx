@@ -61,7 +61,7 @@ export default class Edit extends Component {
         }
         this.editor.create()
     }
-    componentDidMount() {
+    componentDidMount () {
         this.initEditor()
         this.getArticle(this.props.match.params.id)
     }
