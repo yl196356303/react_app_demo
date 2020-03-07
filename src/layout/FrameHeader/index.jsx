@@ -12,21 +12,25 @@ import logo from '../../assets/images/logo.png'
 import './Header.less'
 import { connect } from 'react-redux'
 import { getNotifiactions } from '../../actions/notifiaction'
+import { logout } from '../../actions/login'
 
 const { Header } = Layout
 
 const mapState = state => {
+    console.log(state)
     const { notificationList } = state.notification
     return {
-        notificationCount: notificationList.filter(item => item.hasRead === false).length
+        notificationCount: notificationList.filter(item => item.hasRead === false).length,
+        displayName: state.user.displayName,
+        avatar: state.user.avatar
     }
 }
 
-@connect(mapState, { getNotifiactions })
+@connect(mapState, { getNotifiactions, logout })
 @withRouter
 class FrameHeader extends Component {
     onMenuItem = ({ key }) => {
-        this.props.history.push(key)
+        key === '/logout' ? this.props.logout() : this.props.history.push(key)
     }
     renderMenu = () => {
         return (
@@ -39,7 +43,7 @@ class FrameHeader extends Component {
                 <Menu.Item key="/admin/settings">
                     设置
                 </Menu.Item>
-                <Menu.Item key="/login">
+                <Menu.Item key="/logout">
                     退出登录
                 </Menu.Item>
             </Menu>
@@ -59,10 +63,10 @@ class FrameHeader extends Component {
                     <img src={ logo } alt="logo" />
                 </div>
                 <div className='yl-headerRight'>
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    <Avatar src={ this.props.avatar } />
                     <Dropdown className='yl-dropdow' overlay={ this.renderMenu } trigger={ ['click'] }>
                         <Badge count={ notificationCount } offset={ [8, -10] }>
-                            欢迎！xxx<DownOutlined />
+                            欢迎！{ this.props.displayName }<DownOutlined />
                         </Badge>
                     </Dropdown>
                 </div>

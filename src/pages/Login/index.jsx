@@ -7,6 +7,9 @@ import {
     Card
 } from 'antd'
 import './login.less'
+import { login } from '../../actions/login'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 
 const layout = {
@@ -16,12 +19,26 @@ const layout = {
 const tailLayout = {
     wrapperCol: { offset: 6, span: 16 },
 }
-export default class Login extends Component {
+
+const mapState = state => {
+    return {
+        isloading: state.user.isloading,
+        islogin: state.user.isLogin
+    }
+}
+
+@connect(mapState, { login })
+class Login extends Component {
     onFinish = values => {
-        console.log('Success:', values)
+        this.props.login(values)
     }
     render() {
+        console.log(this.props.islogin)
         return (
+            this.props.islogin
+            ?
+            <Redirect to='admin' />
+            :
             <div className='yl-login'>
                 <Card
                     className='yl-login-card'
@@ -37,7 +54,7 @@ export default class Login extends Component {
                             name="username"
                             rules={ [{ required: true, message: '用户名必填' }] }
                         >
-                            <Input placeholder='用户名' />
+                            <Input disabled={ this.props.isloading } placeholder='用户名' />
                         </Form.Item>
 
                         <Form.Item
@@ -45,17 +62,17 @@ export default class Login extends Component {
                             name="password"
                             rules={ [{ required: true, message: '密码必填' }] }
                         >
-                            <Input.Password placeholder='密码' />
+                            <Input.Password disabled={ this.props.isloading } placeholder='密码' />
                         </Form.Item>
 
                         <Form.Item { ...tailLayout } name="remember" valuePropName="checked">
-                            <Checkbox>记住我</Checkbox>
+                            <Checkbox disabled={ this.props.isloading }>记住我</Checkbox>
                         </Form.Item>
 
                         <Form.Item { ...tailLayout }>
-                            <Button type="primary" htmlType="submit">
+                            <Button loading={ this.props.isloading } type="primary" htmlType="submit">
                                 登录
-                        </Button>
+                             </Button>
                         </Form.Item>
                     </Form>
                 </Card>
@@ -63,3 +80,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default Login

@@ -6,7 +6,6 @@ import './style/App.less'
 import { connect } from 'react-redux'
 
 const mapState = (state) => {
-    console.log(state)
     return {
         isLogin: state.user.isLogin
     }
