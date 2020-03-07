@@ -90,7 +90,6 @@ export default class Article extends Component {
     const res = await getArticleList()
     let columns = Object.keys(res.result.list[0])
     columns = this.getColumns(columns)
-    console.log()
     if(!this.updater.isMounted(this)) return
     this.setState({
       total: res.result.total,
