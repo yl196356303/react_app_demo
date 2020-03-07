@@ -15,7 +15,7 @@ const initState = () => {
             displayName: '',
             avatar: '',
             role: '',
-            isLogin,
+            isLogin: false,
             isloading: false
         }
     }
@@ -35,7 +35,14 @@ export default (state = initState(), action) => {
                 isloading: false
             }
         case actionType.FETCH_LOGIN_FAIL:
-            return initState()
+            return {
+                id: '',
+                displayName: '',
+                avatar: '',
+                role: '',
+                isLogin: false,
+                isloading: false
+            }
         default:
             return state
     }

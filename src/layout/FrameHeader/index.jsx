@@ -40,8 +40,8 @@ class FrameHeader extends Component {
                         通知中心
                     </Badge>
                 </Menu.Item>
-                <Menu.Item key="/admin/settings">
-                    设置
+                <Menu.Item key="/admin/profile">
+                    个人设置
                 </Menu.Item>
                 <Menu.Item key="/logout">
                     退出登录
@@ -53,7 +53,6 @@ class FrameHeader extends Component {
         this.props.getNotifiactions()
     }
     render() {
-        console.log(this.props)
         const {
             notificationCount
         } = this.props

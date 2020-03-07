@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 
 const mapState = (state) => {
     return {
-        isLogin: state.user.isLogin
+        isLogin: state.user.isLogin,
+        role: state.user.role
     }
 }
 
@@ -27,7 +28,8 @@ class App extends Component {
                                     path={ route.path }
                                     exact={ route.exact }
                                     render={ routerProps => {
-                                        return <route.component { ...routerProps } />
+                                        const isRole = route.role.includes(this.props.role)
+                                        return isRole ? <route.component { ...routerProps } /> : <Redirect to='/admin/noauth' />
                                     } }
                                 />
                             )
